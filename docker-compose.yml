@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+    gateway:
+        image: baranbartu/k-api-gateway:latest
+        command: sh -c "uvicorn main:app --reload --host 0.0.0.0"
+        build:
+            context: ./gateway
+            dockerfile: Dockerfile
+        env_file:
+            - ./gateway/.env
+        ports:
+          - 8001:8000
+        depends_on:
+          - users
+          - orders
+        volumes:
+          - ./gateway:/app
+
+    users:
+        image: baranbartu/k-users:latest
+        command: sh -c "uvicorn main:app --reload --host 0.0.0.0"
+        build:
+            context: ./users
+            dockerfile: Dockerfile
+        env_file:
+            - ./users/.env
+        volumes:
+          - ./users:/app
+
+    orders:
+        image: baranbartu/k-orders:latest
+        command: sh -c "uvicorn main:app --reload --host 0.0.0.0"
+        build:
+            context: ./orders
+            dockerfile: Dockerfile
+        env_file:
+            - ./orders/.env
+        volumes:
+          - ./orders:/app
