@@ -2,8 +2,11 @@ from fastapi import FastAPI, status, Request, Response
 
 from conf import settings
 from core import route
-from datastructures import (UsernamePasswordForm, UserForm,
-                            UserUpdateForm, OrderForm)
+
+from datastructures.users import (UsernamePasswordForm,
+                                  UserForm,
+                                  UserUpdateForm)
+from datastructures.orders import OrderForm
 
 app = FastAPI()
 
@@ -16,6 +19,7 @@ app = FastAPI()
     service_url=settings.USERS_SERVICE_URL,
     authentication_required=False,
     post_processing_func='post_processing.access_token_generate_handler',
+    response_model='datastructures.users.LoginResponse'
 )
 async def login(username_password: UsernamePasswordForm,
                 request: Request, response: Response):
@@ -33,6 +37,7 @@ async def login(username_password: UsernamePasswordForm,
     authentication_token_decoder='auth.decode_access_token',
     service_authorization_checker='auth.is_admin_user',
     service_header_generator='auth.generate_request_header',
+    response_model='datastructures.users.UserResponse',
 )
 async def create_user(user: UserForm, request: Request, response: Response):
     pass
@@ -49,6 +54,8 @@ async def create_user(user: UserForm, request: Request, response: Response):
     authentication_token_decoder='auth.decode_access_token',
     service_authorization_checker='auth.is_admin_user',
     service_header_generator='auth.generate_request_header',
+    response_model='datastructures.users.UserResponse',
+    response_list=True
 )
 async def get_users(request: Request, response: Response):
     pass
@@ -65,6 +72,7 @@ async def get_users(request: Request, response: Response):
     authentication_token_decoder='auth.decode_access_token',
     service_authorization_checker='auth.is_admin_user',
     service_header_generator='auth.generate_request_header',
+    response_model='datastructures.users.UserResponse',
 )
 async def get_user(user_id: int, request: Request, response: Response):
     pass
@@ -97,6 +105,7 @@ async def delete_user(user_id: int, request: Request, response: Response):
     authentication_token_decoder='auth.decode_access_token',
     service_authorization_checker='auth.is_admin_user',
     service_header_generator='auth.generate_request_header',
+    response_model='datastructures.users.UserResponse',
 )
 async def update_user(user_id: int, user: UserUpdateForm,
                       request: Request, response: Response):
@@ -114,6 +123,8 @@ async def update_user(user_id: int, user: UserUpdateForm,
     authentication_token_decoder='auth.decode_access_token',
     service_authorization_checker='auth.is_default_user',
     service_header_generator='auth.generate_request_header',
+    response_model='datastructures.orders.OrderResponse',
+    response_list=True,
 )
 async def get_orders(request: Request, response: Response):
     pass
@@ -130,6 +141,7 @@ async def get_orders(request: Request, response: Response):
     authentication_token_decoder='auth.decode_access_token',
     service_authorization_checker='auth.is_default_user',
     service_header_generator='auth.generate_request_header',
+    response_model='datastructures.orders.OrderResponse',
 )
 async def create_order(order: OrderForm, request: Request, response: Response):
     pass

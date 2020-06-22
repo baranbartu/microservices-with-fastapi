@@ -1,4 +1,4 @@
-# API Gateway Approached Microservices, Authentication with FastAPI
+# Microservices, API Gateway, Authentication with FastAPI, non-blocking i/o
 - This repo is composed of a bunch of small microservices considering api gateway approach
 - Expected number of microservices was two, but considering that services
   should not create dependency on each other to prevent SPOF, also to prevent duplicate codes,
@@ -46,7 +46,7 @@
 ## IMPORTANT NOTES & POSSIBLE TODOs
 - Tried to use coroutines on especially i/o operations to boost the performance of gateway. (aiohttp)
 - Again, non-blocking db client library is used. (tortoise-orm)
-- Tried to use dependency injection on gateway api new router, because i am thinking  to
+- Tried to use dependency injection on gateway api as a new router, because i am thinking to
   feed this project and make it open source for other people as well.
 - Tried to implement declarative way for api gateway rules, for now it works
   based on decorator, but my purpose is to make it more declarative like using
@@ -55,15 +55,10 @@
 - API gateway approach is considered, also inspired by Zuul, event-driven approach can be easily applied in case needed.
 - Authentication and authorization are seperated from the services to keep things clean, one service does for all.
 - JWT token are generated in gateway service and other services behind the gateway receive a seperated
-  header called request-user-id to use user info in jwt token.
-- Unit tests are written for only users service to show up my understanding of.
-  > under ./users/tests/*
-  > example run: docker exec -ti <docker users container id> python -m tests.auth
-- Docstrings are written for only gateway service for a couple of methods to show up my understanding of.
-  > under ./gateway/network.py[make_request], ./gateway/core.py[route]
+  header called request-user-id to use user specific info.
 - thread-safety was not considered especially on fake users service since we
   use file operations, and it might produce race conditions
-- Another autorization level can be added into private-network services
+- Another authorization level can be added into private-network services
   checking if request-user-id header exists
 - hashed_password might be shadowed in users response
 - API versioning might be considered

@@ -16,5 +16,14 @@
         "user_type": "default",
         "hashed_password": "$2b$12$o5FUxT.lT6PZXU8KHPz4tug1yGI.gXuyZNT8VWbKBNaAEP10/yI.W",
         "created_by": 1
+    },
+    {
+        "id": 3,
+        "username": "test",
+        "email": "test@baran.com",
+        "full_name": "tset tset",
+        "user_type": "default",
+        "hashed_password": "$2b$12$wf5AZPA/b4gesbPoMUcc2.BvIbGdDQFLd5SZizK9pthHo09WPf/Em",
+        "created_by": 1
     }
 ]

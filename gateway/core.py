@@ -1,9 +1,10 @@
 import aiohttp
 import functools
 
-from importlib import import_module
 
+from importlib import import_module
 from fastapi import Request, Response, HTTPException, status
+from typing import List
 
 from exceptions import (AuthTokenMissing, AuthTokenExpired, AuthTokenCorrupted)
 from network import make_request
@@ -17,6 +18,8 @@ def route(
         authentication_token_decoder: str = 'auth.decode_access_token',
         service_authorization_checker: str = 'auth.is_admin_user',
         service_header_generator: str = 'auth.generate_request_header',
+        response_model: str = None,
+        response_list: bool = False
 ):
     """
     it is an advanced wrapper for FastAPI router, purpose is to make FastAPI
@@ -32,13 +35,27 @@ def route(
         authentication_token_decoder: decodes JWT token as a proper payload
         service_authorization_checker: does simple front authorization checks
         service_header_generator: generates headers for inner services from jwt token payload # noqa
+        response_model: shows return type and details on api docs
 
     Returns:
         wrapped endpoint result as is
 
     """
+
+    # request_method: app.post || app.get or so on
+    # app_any: app.post('/api/login', status_code=200, response_model=int)
+    if response_model:
+        response_model = import_function(response_model)
+        if response_list:
+            response_model = List[response_model]
+
+    app_any = request_method(
+        path, status_code=status_code,
+        response_model=response_model
+    )
+
     def wrapper(f):
-        @request_method(path, status_code=status_code)
+        @app_any
         @functools.wraps(f)
         async def inner(request: Request, response: Response, **kwargs):
             service_headers = {}
