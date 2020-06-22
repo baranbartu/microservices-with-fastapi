@@ -24,23 +24,23 @@
 # Example requests
 - There are already created 2 users in users db
 - get api token with admin user
-`
-curl --header "Content-Type: application/json" \
-     --request POST \
-     --data '{"username":"admin","password":"a"}' \
-     http://localhost:8001/api/login
-`
+  ```
+  curl --header "Content-Type: application/json" \
+       --request POST \
+       --data '{"username":"admin","password":"a"}' \
+       http://localhost:8001/api/login
+  ```
 - You'll see something similar to below
-`
-{"access_token":"***","token_type":"bearer"}
-`
+  ```
+  {"access_token":"***","token_type":"bearer"}
+  ```
 - use this token to make administrative level requests
-`
-curl --header "Content-Type: application/json" \
-     --header "Authorization: Bearer ***" \
-     --request GET \
-     http://localhost:8001/api/users
-`
+  ```
+  curl --header "Content-Type: application/json" \
+       --header "Authorization: Bearer ***" \
+       --request GET \
+       http://localhost:8001/api/users
+  ```
 - Similar trials can be also done with default user to create & view orders
 
 ## IMPORTANT NOTES & POSSIBLE TODOs
@@ -60,7 +60,7 @@ curl --header "Content-Type: application/json" \
   > under ./users/tests/*
   > example run: docker exec -ti <docker users container id> python -m tests.auth
 - Docstrings are written for only gateway service for a couple of methods to show up my understanding of.
-  > ./gateway/network.py[make_request], ./gateway/core.py[route]
+  > under ./gateway/network.py[make_request], ./gateway/core.py[route]
 - thread-safety was not considered especially on fake users service since we
   use file operations, and it might produce race conditions
 - Another autorization level can be added into private-network services
