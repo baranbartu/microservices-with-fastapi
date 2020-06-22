@@ -63,6 +63,7 @@
 - hashed_password might be shadowed in users response
 - API versioning might be considered
 - JWT token TTL can be changed under ./gateway/conf.py[settings]
+- Nginx or similar tool can be added in front of all services to leverage more benefits
 
 ## Overall Diagram
 ![ScreenShot](https://raw.github.com/baranbartu/microservices-with-fastapi/master/diagram.png)
