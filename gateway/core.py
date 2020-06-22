@@ -36,6 +36,7 @@ def route(
         service_authorization_checker: does simple front authorization checks
         service_header_generator: generates headers for inner services from jwt token payload # noqa
         response_model: shows return type and details on api docs
+        response_list: decides whether response structure is list or not
 
     Returns:
         wrapped endpoint result as is
