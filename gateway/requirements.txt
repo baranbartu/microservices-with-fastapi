@@ -3,7 +3,7 @@ uvicorn==0.11.5
 PyJWT==1.7.1
 
 # async http requests & fast dns resolving
-aiohttp==3.6.2
+aiohttp==3.7.4
 aiodns==2.0.0
 
 # for test purposes
