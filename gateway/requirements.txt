@@ -1,4 +1,4 @@
-fastapi==0.58.0
+fastapi==0.65.2
 uvicorn==0.11.5
 PyJWT==1.7.1
 
