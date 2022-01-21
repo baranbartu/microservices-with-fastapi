@@ -9,4 +9,4 @@ aiodns==2.0.0
 # for test purposes
 flake8==3.8.3
 ipdb==0.13.2
-ipython==7.15.0
+ipython==7.16.3
