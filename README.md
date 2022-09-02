@@ -2,7 +2,7 @@
 - This repo is composed of a bunch of small microservices considering API gateway approach
 - Expected number of microservices was two, but considering that services
   should not create dependency on each other to prevent SPOF, also to prevent duplicate codes,
-  i decided to put one API gateway in front that does JWT authentication for both services
+  I decided to put one API gateway in front that does JWT authentication for both services
   which I am inspired by Netflix/Zuul
 - We have 3 services including gateway.
 - Only gateway can access internal microservices through the internal network (users, orders)
