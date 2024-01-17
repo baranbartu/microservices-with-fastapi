@@ -1,6 +1,6 @@
 fastapi==0.58.0
 uvicorn==0.11.5
-PyJWT==1.7.1
+PyJWT==2.4.0
 
 # async http requests & fast dns resolving
 aiohttp==3.6.2
